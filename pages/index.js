@@ -14,9 +14,13 @@ import {FaThumbsDown, FaThumbsUp} from "react-icons/fa";
 
 export default function Home({ data }) {
   const [images, setImages] = useState(data);
-  const doLike = (imageId, liked) => {
-    likeImage(imageId, liked)
-    updateCount(imageId, liked)
+  const doLike = async (imageId, liked) => {
+    try {
+      await likeImage(imageId, liked);
+      updateCount(imageId, liked);
+    } catch (error) {
+      console.error("Erro ao curtir a imagem:", error);
+    }
   };
 
   const updateCount = (imageId, liked) => {
@@ -71,7 +75,7 @@ export default function Home({ data }) {
 
               <Box display="flex" margin={3} position="relative">
                 <Box margin={3}>
-                  <FaThumbsUp onClick={() => doLike(img.id, true)}/>
+                  <FaThumbsUp onClick={() => doLike(img.id, true)} />
                 </Box>
                 <Box margin={3}>
                   <FaThumbsDown onClick={() => doLike(img.id, false)} />

@@ -8,6 +8,8 @@ npm install
 
 Start the development server:
 
+1. Use node version >= 20.0.0
+
 ```bash
 npm run dev
 # or
